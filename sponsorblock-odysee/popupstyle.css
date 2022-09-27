@@ -1,0 +1,159 @@
+html {
+	width:600px;
+	
+}
+body {
+	margin:0;
+	background: #333;
+	    color: #fff;
+}		
+.opt_body_holder {
+	    padding: 0 10px;
+}
+.single_opt {
+	display:block;
+	width:100%;
+	padding:10px 0;
+	color: #fff;
+	border-bottom: 1px solid #B12912;
+	font-size: 18px;
+	
+}
+.sbo_opt_title {
+	font-size: 26px;
+    padding: 10px;
+    background: #181818;
+    color: #fff;
+}
+.sbo_opt_footer {
+	
+	padding: 15px 0 0 0;
+	
+}
+.footer_info {
+	    margin-top: 15px;
+    font-style: italic;
+    background: #181818;
+    color: #fff;
+    padding: 5px;
+}
+.footer_info a {
+	color:#fff;
+}
+#save {
+    font-size: 18px;
+    cursor: pointer;
+    background: #B12912;
+    color: #fff;
+    border: 2px solid #B12912;
+    padding: 6px 18px;
+    border-radius: 30px;
+    font-weight: bold;
+}
+#save:hover {
+	 background: #333333;
+}
+
+#status {
+	 opacity: 0;
+    transition: opacity .7s;
+    -webkit-transition: opacity .7s;
+	    font-size: 18px;
+    margin-left: 10px;
+	    color: #4eca57;
+}
+#skip_cats {
+	display: grid;
+    grid-gap: 6px;
+    grid-template-columns: repeat(auto-fill, minmax(191px, 1fr));
+    align-items: center;
+    justify-content: space-between;
+    font-size: 16px;
+	
+}
+.skip_categories_wrap {
+	border-bottom: 1px solid #B12912;
+	padding: 10px 0;
+}
+.notif_info {
+    margin-top: 10px;
+	font-size: 14px;
+}
+.notif_info p {
+	margin: 0;
+	font-size: 14px;
+}
+.section_title {
+	font-size: 20px;
+	margin: 0 0 14px 0;
+}
+#plugin_info_btn  {
+	vertical-align: middle;
+	cursor: pointer;
+}
+#plugin_info_btn svg {
+	fill: #FFFFFF;
+}
+#plugin_info_btn:hover svg {
+	fill: #B12912;
+}
+#plugin_info_div {
+	font-size: 15px;
+    background: #181818;
+    margin: 10px 0;
+    padding: 7px 10px;
+}
+/* SWITCH */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 55px;
+  height: 28px;
+}
+
+.switch input { 
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+  border-radius: 34px;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 20px;
+  width: 20px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+   border-radius: 50%;
+}
+
+input:checked + .slider {
+  background-color: #B12912;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #B12912;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+

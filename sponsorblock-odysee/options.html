@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head><title>SponsorBlock for Odysee</title>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="popupstyle.css">
+</head>
+<body>
+<div class="sbo_opt_title">SponsorBlock for Odysee <span id="plugin_info_btn"><svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="24" height="24" viewBox="0 0 24 24" ><path d="M 12 2 C 6.4889971 2 2 6.4889971 2 12 C 2 17.511003 6.4889971 22 12 22 C 17.511003 22 22 17.511003 22 12 C 22 6.4889971 17.511003 2 12 2 z M 12 4 C 16.430123 4 20 7.5698774 20 12 C 20 16.430123 16.430123 20 12 20 C 7.5698774 20 4 16.430123 4 12 C 4 7.5698774 7.5698774 4 12 4 z M 11 7 L 11 9 L 13 9 L 13 7 L 11 7 z M 11 11 L 11 17 L 13 17 L 13 11 L 11 11 z"></path></svg></span></div>
+
+<div class="opt_body_holder">
+<div id="plugin_info_div" style="display: none;">
+	This plugin works only on videos imported (sync) from YouTube. This is a very basic plugin whose purpose is only to load and skip sponsored segments. So, there are no advanced features like statistics, advanced settings, submitting segments...etc. There is a possibility that the plugin will not work with certain videos if the author has changed certain video information. The plugin uses SponsorBlock API. I'm not a front-end developer so my code isn't the best in the world.
+	</div>
+	<div class="single_opt">
+		<label class="switch">
+		  <input type="checkbox" name="checkbox" id="opt_plugin" checked>
+		  <span class="slider"></span>
+		</label>
+		<span>Enable plugin</span>
+	</div>
+
+	<div class="single_opt hideifdisabled">
+		<label class="switch">
+		  <input type="checkbox" name="checkbox" id="opt_notifications" checked>
+		  <span class="slider"></span>
+		</label>
+		<span>Show notice after a segment is skipped</span>
+		<div class="notif_info">
+		<span>Hide notification popup after </span><input id="notif_time" type="number" min="1" max="60" placeholder="(1-60)" /><span> seconds</span>
+		</div>
+	</div>
+	
+	<div class="skip_categories_wrap hideifdisabled">
+	<p class="section_title">Categories to skip:</p>
+	<div id="skip_cats">
+		<label><input id="sponsor" type="checkbox" value="sponsor" />Sponsor</label>
+		<label><input id="selfpromo" type="checkbox" value="selfpromo" />Unpaid/Self Promotion</label>
+		<label><input id="exclusive_access" type="checkbox" value="exclusive_access" />Exclusive Access</label>
+		<label><input id="interaction" type="checkbox" value="interaction" />Subscribe Reminder</label>
+		<label><input id="intro" type="checkbox" value="intro" />Intermission/Intro Animation</label>
+		<label><input id="outro" type="checkbox" value="outro" />Endcards/Credits</label>
+		<label><input id="preview" type="checkbox" value="preview" />Preview/Recap</label>
+		<label><input id="filler" type="checkbox" value="filler" />Filler Tangent/Jokes</label>
+	</div>
+	<p>If no category is selected, the plugin will skip "Sponsor" segments only (default API behavior).</p>
+	</div>
+
+	
+	<div class="sbo_opt_footer">
+
+	<button id="save">Save Changes</button><span id="status"></span>
+	</div> 
+	
+</div> 
+
+
+<div class="footer_info">Ver <span id="ver_num"></span> | <a href="https://github.com/stefanmm/sponsorblock-odysee" target="_blank">Github</a></div>
+<script src="options.js"></script>
+
+</body>
+</html>
