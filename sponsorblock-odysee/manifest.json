@@ -1,6 +1,6 @@
 {
 	"name": "SponsorBlock for Odysee",
-	"version": "1.0",
+	"version": "1.1",
 	"description": "Skip sponsored segments on Odysee videos imported from YouTube. Very basic plugin - only load and skip sponsored segments.",
 	"manifest_version": 3,
 	"options_ui": {
@@ -17,7 +17,8 @@
 	},
 	"content_scripts": [
 		{
-			"js": [ "odyseesponsorskip.js"],
+			"js": ["odyseesponsorskip.js"],
+			"css": ["styles.css"],
 			"matches": ["https://*.odysee.com/*"],
 			"run_at": "document_start",
 			"all_frames": true

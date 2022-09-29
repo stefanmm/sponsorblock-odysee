@@ -1,5 +1,16 @@
-.OsbToastNotif {
-	position: absolute;
-	bottom: 20px;
-	right: 10px;
+.sponsor_single_bar:before {
+	content: " ";
+    background-color: rgb(0, 212, 0);
+    width: 100%;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    top: 20px;
+    opacity: 0.7;
+}
+.categoryTitle{
+	display: inline-block;
+    background: rgba(0, 0, 0, 0.8);
+    padding: 4px 8px!important;
+    border-radius: 0.3em;
 }
