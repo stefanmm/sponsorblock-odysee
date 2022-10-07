@@ -127,8 +127,12 @@ function init(options) {
 
 		// Get the ID of the Youtube video by parsing it from the cover image
 		var bgimg = document.querySelector('div.content__cover').style.backgroundImage;
-
-		if (bgimg && !bgimg.includes('.webp') && !bgimg.includes('.png') && !bgimg.includes('.jpg') && !bgimg.includes('.jpeg') && !bgimg.includes('.gif')) {
+		
+		if(bgimg.includes('ytimg.com')){
+			id = bgimg.split('ytimg.com/vi/').pop().split('/')[0];
+		}
+		
+		if (!id && bgimg && !bgimg.includes('.webp') && !bgimg.includes('.png') && !bgimg.includes('.jpg') && !bgimg.includes('.jpeg') && !bgimg.includes('.gif')) {
 			id = bgimg.split('thumbnails.lbry.com/').pop().split('"')[0];
 		}
 
@@ -136,6 +140,7 @@ function init(options) {
 			// console.log("SponsorBlock: YT ID not found");
 			return;
 		}
+		
 		if (document.getElementById('barWrap')) {
 			document.getElementById('barWrap').remove(); // Clear bars if exists
 		}
@@ -210,9 +215,16 @@ function init(options) {
 
 			// Show the category name above the thumbnail (on hover)
 			const categoryTitle = document.createElement('div');
-			categoryTitle.style.cssText += ' display:block;margin-top:-25px;';
-			var thumbEl = document.getElementsByClassName("vjs-vtt-thumbnail-display")[0];
-			thumbEl.appendChild(categoryTitle);
+			
+			catHolder = document.getElementsByClassName("vjs-progress-holder")[0].getElementsByClassName("vjs-mouse-display")[0];
+			catHolderClass = "catName-time";
+			if(document.getElementsByClassName("vjs-vtt-thumbnail-display").length != 0){
+				var catHolder = document.getElementsByClassName("vjs-vtt-thumbnail-display")[0];
+				var catHolderClass = "catName-thumbnail";
+			}
+
+			categoryTitle.classList.add(catHolderClass);
+			catHolder.appendChild(categoryTitle);
 
 			Array.from(document.getElementsByClassName('sponsor_single_bar')).forEach(e => e.addEventListener("mouseenter", function (e) {
 				categoryTitle.innerHTML = "";
@@ -232,7 +244,7 @@ function init(options) {
 			var current_time = video_player.currentTime;
 			var current_segment = segments.find(segment => segment.segment[0] <= current_time && segment.segment[1] >= current_time);
 
-			if (current_segment && !video_player.paused) {
+			if (current_segment && !video_player.paused && video_player.readyState > video_player.HAVE_FUTURE_DATA) {
 				video_player.currentTime = current_segment.segment[1]; // Skip to the end of the segment
 				if (isNotifications) {
 					showNotif('<span style="font-size: 26px;position: absolute;left: 13px;top: 5px;color: #ff3c3c;">»</span> Skipping to ' + secondsToHms(Math.ceil(current_segment.segment[1])) + ' because there was a ' + current_segment.category + ' segment');

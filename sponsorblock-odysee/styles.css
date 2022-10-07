@@ -1,6 +1,6 @@
 .sponsor_single_bar:before {
 	content: " ";
-    background-color: rgb(0, 212, 0);
+    background-color: #5FCE36;
     width: 100%;
     position: absolute;
     left: 0;
@@ -8,9 +8,50 @@
     top: 20px;
     opacity: 0.7;
 }
+.sponsor_single_bar[sponsorblock-category="sponsor"]:before {
+    background-color: #5FCE36;
+}
+.sponsor_single_bar[sponsorblock-category="selfpromo"]:before {
+    background-color: #FFFC4A;
+}
+.sponsor_single_bar[sponsorblock-category="exclusive_access"]:before {
+    background-color: #3B865F;
+}
+.sponsor_single_bar[sponsorblock-category="interaction"]:before {
+    background-color: #BB3FF8;
+}
+.sponsor_single_bar[sponsorblock-category="poi_highlight"]:before {
+    background-color: #EC4383;
+}
+.sponsor_single_bar[sponsorblock-category="intro"]:before {
+    background-color: #70FAFE;
+}
+.sponsor_single_bar[sponsorblock-category="outro"]:before {
+    background-color: #0028E6;
+}
+.sponsor_single_bar[sponsorblock-category="preview"]:before {
+    background-color: #398ED2;
+}
+.sponsor_single_bar[sponsorblock-category="filler"]:before {
+    background-color: #6632F8;
+}
 .categoryTitle{
 	display: inline-block;
     background: rgba(0, 0, 0, 0.8);
     padding: 4px 8px!important;
     border-radius: 0.3em;
+}
+.catName-thumbnail {
+	display:block;
+	margin-top:-25px;
+}
+.catName-time {
+	left: -70px;
+    width: 140px;
+    top: -60px;
+    position: absolute;
+    overflow: auto;
+    font-size: 14px;
+    word-break: break-all;
+    z-index: 1;
 }
