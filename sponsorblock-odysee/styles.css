@@ -55,3 +55,7 @@
     word-break: break-all;
     z-index: 1;
 }
+.video-js.sponsorTrue .vjs-progress-control .vjs-mouse-display,
+.video-js.sponsorTrue .vjs-play-progress:before {
+	pointer-events: none;
+}

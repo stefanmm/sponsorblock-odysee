@@ -8,7 +8,7 @@ chrome.storage.sync.get({
 	opt_notifications: true,
 	selected_cats: '["sponsor"]',
 	notif_time: 4
-	}, function (items) {
+}, function (items) {
 	if (items.opt_plugin) {
 		init([items.opt_notifications, items.selected_cats, items.notif_time]);
 	}
@@ -116,7 +116,7 @@ function init(options) {
 	});
 
 	function waitPlayer(video_player) {
-		// Vaid for a video to be ready so we can parse all data from it
+		// Vait for a video to be ready so we can parse all data from it
 		video_player.addEventListener('loadeddata', function () {
 			startApp();
 		});
@@ -127,11 +127,11 @@ function init(options) {
 
 		// Get the ID of the Youtube video by parsing it from the cover image
 		var bgimg = document.querySelector('div.content__cover').style.backgroundImage;
-		
-		if(bgimg.includes('ytimg.com')){
+
+		if (bgimg.includes('ytimg.com')) {
 			id = bgimg.split('ytimg.com/vi/').pop().split('/')[0];
 		}
-		
+
 		if (!id && bgimg && !bgimg.includes('.webp') && !bgimg.includes('.png') && !bgimg.includes('.jpg') && !bgimg.includes('.jpeg') && !bgimg.includes('.gif')) {
 			id = bgimg.split('thumbnails.lbry.com/').pop().split('"')[0];
 		}
@@ -140,7 +140,7 @@ function init(options) {
 			// console.log("SponsorBlock: YT ID not found");
 			return;
 		}
-		
+
 		if (document.getElementById('barWrap')) {
 			document.getElementById('barWrap').remove(); // Clear bars if exists
 		}
@@ -177,6 +177,7 @@ function init(options) {
 				return;
 			}
 			segments = segments_;
+			document.getElementById('vjs_video_3').className += ' sponsorTrue';
 			//console.log(segments);
 			if (isNotifications) {
 				// Prepare notification wrap
@@ -199,7 +200,7 @@ function init(options) {
 
 				if (duration > 0) {
 					const bar = document.createElement('li');
-
+					bar.id = segment.UUID;
 					bar.innerHTML = '&nbsp;';
 					bar.setAttribute('sponsorblock-category', segment.category);
 					bar.style.width = `${intervalToPercentage(startTime, endTime)}`;
@@ -215,10 +216,10 @@ function init(options) {
 
 			// Show the category name above the thumbnail (on hover)
 			const categoryTitle = document.createElement('div');
-			
+
 			catHolder = document.getElementsByClassName("vjs-progress-holder")[0].getElementsByClassName("vjs-mouse-display")[0];
 			catHolderClass = "catName-time";
-			if(document.getElementsByClassName("vjs-vtt-thumbnail-display").length != 0){
+			if (document.getElementsByClassName("vjs-vtt-thumbnail-display").length != 0) {
 				var catHolder = document.getElementsByClassName("vjs-vtt-thumbnail-display")[0];
 				var catHolderClass = "catName-thumbnail";
 			}
@@ -226,13 +227,17 @@ function init(options) {
 			categoryTitle.classList.add(catHolderClass);
 			catHolder.appendChild(categoryTitle);
 
-			Array.from(document.getElementsByClassName('sponsor_single_bar')).forEach(e => e.addEventListener("mouseenter", function (e) {
-				categoryTitle.innerHTML = "";
-				categoryTitle.innerHTML = '<div class="categoryTitle">' + this.getAttribute("sponsorblock-category") + '</div>';
-			}));
-			Array.from(document.getElementsByClassName('sponsor_single_bar')).forEach(e => e.addEventListener("mouseleave", function (e) {
-				categoryTitle.innerHTML = "";
-			}));
+			var allSingleBars = document.getElementsByClassName('sponsor_single_bar');
+			Array.from(allSingleBars).forEach(e => e.addEventListener("mouseenter", function (e) {
+					categoryTitle.innerHTML = "";
+					categoryTitle.innerHTML = '<div class="categoryTitle">' + this.getAttribute("sponsorblock-category") + '</div>';
+				}));
+			Array.from(allSingleBars).forEach(e => e.addEventListener("mouseleave", function (e) {
+					categoryTitle.innerHTML = "";
+				}));
+			Array.from(allSingleBars).forEach(e => e.addEventListener("click", function (e) {
+					this.setAttribute("doNotSkip", "1");
+				}));
 
 		});
 
@@ -244,7 +249,12 @@ function init(options) {
 			var current_time = video_player.currentTime;
 			var current_segment = segments.find(segment => segment.segment[0] <= current_time && segment.segment[1] >= current_time);
 
+
 			if (current_segment && !video_player.paused && video_player.readyState > video_player.HAVE_FUTURE_DATA) {
+				var segmentEl = document.getElementById(current_segment.UUID);
+				if (segmentEl.hasAttribute("doNotSkip")) {
+					return;
+				}
 				video_player.currentTime = current_segment.segment[1]; // Skip to the end of the segment
 				if (isNotifications) {
 					showNotif('<span style="font-size: 26px;position: absolute;left: 13px;top: 5px;color: #ff3c3c;">»</span> Skipping to ' + secondsToHms(Math.ceil(current_segment.segment[1])) + ' because there was a ' + current_segment.category + ' segment');
